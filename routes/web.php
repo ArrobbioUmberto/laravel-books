@@ -1,6 +1,8 @@
 <?php
 
 use Illuminate\Support\Facades\Route;
+use App\Models\Book;
+use App\Http\Controllers\Guest\BookController;
 
 /*
 |--------------------------------------------------------------------------
@@ -16,3 +18,6 @@ use Illuminate\Support\Facades\Route;
 Route::get('/', function () {
     return view('welcome');
 });
+
+Route::resource('books', BookController::class);
+
