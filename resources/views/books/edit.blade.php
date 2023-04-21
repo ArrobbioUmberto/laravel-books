@@ -5,6 +5,7 @@
     <div class="container">
         <form action="{{ route('books.store') }}" method="POST">
             @csrf
+            @method('PUT')
 
             <div class="mb-3">
                 <label for="publishing-company" class="form-label">Casa Editrice</label>
