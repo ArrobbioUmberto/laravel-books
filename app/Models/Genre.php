@@ -5,12 +5,12 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
-class Book extends Model
+class Genre extends Model
 {
     use HasFactory;
 
-    public function genre()
+    public function books()
     {
-        return $this->belongsTo(Genre::class);
+        return $this->hasMany(Book::class);
     }
 }
