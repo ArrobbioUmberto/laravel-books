@@ -11,6 +11,7 @@
                     <th>Autore</th>
                     <th>Numero pagine</th>
                     <th>Cod. ISBN</th>
+                    <th>Genere</th>
                     <th>Disponibile</th>
                     <th>Azioni</th>
                 </tr>
@@ -28,6 +29,7 @@
                         <td>{{ $book->author }}</td>
                         <td>{{ $book->pages }}</td>
                         <td>{{ $book->ISBN }}</td>
+                        <td>{{ $book->genre->name }}</td>
                         <td>
                             @if ($book->is_available)
                                 Si

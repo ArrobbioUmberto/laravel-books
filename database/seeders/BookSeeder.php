@@ -5,6 +5,7 @@ namespace Database\Seeders;
 use Illuminate\Database\Console\Seeds\WithoutModelEvents;
 use Illuminate\Database\Seeder;
 use App\Models\Book;
+use App\Models\Genre;
 use Faker\Generator as Faker;
 
 class BookSeeder extends Seeder
@@ -16,7 +17,8 @@ class BookSeeder extends Seeder
      */
     public function run(Faker $faker)
     {
-        for($i = 0; $i < 100; $i++) {
+        $genre_ids = Genre::all()->pluck('id')->all();
+        for ($i = 0; $i < 100; $i++) {
 
             $first_name = $faker->firstName();
             $last_name = $faker->lastName();
@@ -31,6 +33,7 @@ class BookSeeder extends Seeder
             $new_book->pages = $faker->numberBetween(10, 3000);
             $new_book->ISBN = $faker->isbn13();
             $new_book->is_available = $faker->randomElement([true, false]);
+            $new_book->genre_id = $faker->randomElement($genre_ids);
 
             $new_book->save();
         }
