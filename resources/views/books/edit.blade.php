@@ -29,14 +29,14 @@
             </div>
 
             <div class="mb-3">
-                <label for="author" class="form-label">Autore</label>
-                <input class="form-control @error('author') is-invalid @enderror" name="author" type="text"
-                    id="author" value="{{ old('author', $book->author) }}">
-                @error('author')
-                    <div class="invalid-feedback">
-                        {{ $message }}
+                <label class="form-label" for="author"> Autori</label>
+                @foreach ($authors as $author)
+                    <div class="form-check">
+                        <input type="checkbox" name="authors[]" class="form-check-input " value="{{ $author->id }}"
+                            id="author">
+                        <label for="author" class="form-check-label">{{ $author->name }}</label>
                     </div>
-                @enderror
+                @endforeach
             </div>
 
             <div class="mb-3">

@@ -26,10 +26,16 @@
                                 {{ $book->title }}
                             </a>
                         </td>
-                        <td>{{ $book->author }}</td>
+                        <td>
+                            @forelse ($book->authors as $author)
+                                <span class="badge rounded-pill text-bg-primary">{{ $author->name }}</span>
+                            @empty
+                                -
+                            @endforelse
+                        </td>
                         <td>{{ $book->pages }}</td>
                         <td>{{ $book->ISBN }}</td>
-                        <td>{{ $book->genre->name }}</td>
+                        <td>{{ $book->genre ? $book->genre->name : '-' }}</td>
                         <td>
                             @if ($book->is_available)
                                 Si
