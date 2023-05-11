@@ -11,10 +11,15 @@ use Illuminate\Validation\Rule;
 
 class BookController extends Controller
 {
-    public function index()
+    public function index(Request $request)
     {
+        $sort = $request->sort ?? "";
+        if ($sort) {
+            $books = Book::all()->sortBy($sort);
+        } else {
+            $books = Book::all();
+        }
 
-        $books = Book::all();
 
         return view('books.index', compact('books'));
     }
@@ -115,5 +120,15 @@ class BookController extends Controller
         $book->delete();
 
         return to_route('books.index');
+    }
+    public function enableToggle(Book $book)
+    {
+        // QUI PRENDO LO STATO ATTUALE DELLO STATO E LO INVERTO PER POI SALVARLO DOPO 
+        $book->is_available = !$book->is_available;
+        $book->save();
+
+        // QUI RIMANDO AD UNA VISTA E IMPLEMENTO UN MESSAGGIO 
+        $message = ($book->is_available) ? 'soldout' : 'stock';
+        return redirect()->back()->with('alert-type', 'success')->with('alert-message', "$book->title:&nbsp;<b>$message</b>");
     }
 }
